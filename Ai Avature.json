@@ -1,0 +1,1491 @@
+{
+  "name": "Ai Avature",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://backend.blotato.com/v2/media",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "blotato-api-key",
+              "value": "={{ $('Prepare for Publish').item.json.blotato_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "url",
+              "value": "={{ $('Get Avatar Video').item.json.data.video_url }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2040,
+        1000
+      ],
+      "id": "2e8c11f8-a351-4249-a641-5fab52b712dd",
+      "name": "Upload to Blotato"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://backend.blotato.com/v2/posts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "blotato-api-key",
+              "value": "={{ $('Prepare for Publish').item.json.blotato_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"post\": {\n    \"target\": {\n      \"targetType\": \"instagram\"\n    },\n    \"content\": {\n      \"text\": {{ $('Prepare for Publish').item.json.final_text_long.toJsonString() }},\n      \"platform\": \"instagram\",\n      \"mediaUrls\": [\"{{ $json.url }}\"]\n    },\n    \"accountId\": \"{{ $('Prepare for Publish').item.json.instagram_id }}\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2280,
+        200
+      ],
+      "id": "5290b0d9-677a-4f2f-986c-704d1a59cd02",
+      "name": "[Instagram] Publish via Blotato"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://backend.blotato.com/v2/posts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "blotato-api-key",
+              "value": "={{ $('Prepare for Publish').item.json.blotato_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"post\": {\n    \"target\": {\n      \"targetType\": \"facebook\",\n      \"pageId\": \"{{ $('Prepare for Publish').item.json.facebook_page_id }}\"\n    },\n    \"content\": {\n      \"text\": {{ $('Prepare for Publish').item.json.final_text_long.toJsonString() }},\n      \"platform\": \"facebook\",\n      \"mediaUrls\": [\"{{ $json.url }}\"]\n    },\n    \"accountId\": \"{{ $('Prepare for Publish').item.json.facebook_id }}\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2280,
+        540
+      ],
+      "id": "d5ccb3d8-d498-49ca-8fe1-03906ac00f5c",
+      "name": "[Facebook] Publish via Blotato"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://backend.blotato.com/v2/posts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "blotato-api-key",
+              "value": "={{ $('Prepare for Publish').item.json.blotato_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"post\": {\n    \"target\": {\n      \"targetType\": \"linkedin\"\n    },\n    \"content\": {\n      \"text\": {{ $('Prepare for Publish').item.json.final_text_long.toJsonString() }},\n      \"platform\": \"linkedin\",\n      \"mediaUrls\": [\"{{ $json.url }}\"]\n    },\n    \"accountId\": \"{{ $('Prepare for Publish').item.json.linkedin_id }}\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2280,
+        1000
+      ],
+      "id": "009d3695-f062-4fc0-8f26-f6c3ea5fd583",
+      "name": "[Linkedin] Publish via Blotato"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://backend.blotato.com/v2/posts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "blotato-api-key",
+              "value": "={{ $('Prepare for Publish').item.json.blotato_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"post\": {\n    \"target\": {\n      \"targetType\": \"tiktok\",\n      \"isYourBrand\": false,\n      \"disabledDuet\": false,\n      \"privacyLevel\": \"PUBLIC_TO_EVERYONE\",\n      \"isAiGenerated\": false,\n      \"disabledStitch\": false,\n      \"disabledComments\": false,\n      \"isBrandedContent\": false\n    },\n    \"content\": {\n      \"text\": {{ $('Prepare for Publish').item.json.final_text_long.toJsonString() }},\n      \"platform\": \"tiktok\",\n      \"mediaUrls\": [\"{{ $json.url }}\"]\n    },\n    \"accountId\": \"{{ $('Prepare for Publish').item.json.tiktok_id }}\"\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2280,
+        1400
+      ],
+      "id": "031000ab-839f-4c5f-9bc8-4d345b5757c6",
+      "name": "[Tiktok] Publish via Blotato"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "={{ $('Prepare for Publish').item.json.final_text_long }}",
+        "options": {
+          "returnImageUrls": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        2280,
+        1800
+      ],
+      "id": "798c7621-6acc-4c2f-956e-5d231d87fbf4",
+      "name": "OpenAI",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://backend.blotato.com/v2/media",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "blotato-api-key",
+              "value": "={{ $('Prepare for Publish').item.json.blotato_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "url",
+              "value": "={{ $json.url }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2500,
+        1800
+      ],
+      "id": "49c40369-7a33-447b-a1f4-c1d144480f94",
+      "name": "Upload to Blotato - Image",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://backend.blotato.com/v2/posts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "blotato-api-key",
+              "value": "={{ $('Prepare for Publish').item.json.blotato_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"post\": {\n    \"target\": {\n      \"targetType\": \"pinterest\",\n      \"boardId\": \"{{ $('Prepare for Publish').item.json.pinterest_board_id }}\",\n      \"link\": \"https://www.tiktok.com/@sabrina_ramonov\"\n    },\n    \"content\": {\n      \"text\": {{ $('Prepare for Publish').item.json.final_text_short.toJsonString() }},,\n      \"platform\": \"pinterest\",\n      \"mediaUrls\": [\"{{ $json.url }}\"]\n    },\n    \"accountId\": \"{{ $('Prepare for Publish').item.json.pinterest_id }}\"\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2720,
+        1800
+      ],
+      "id": "86509504-4c9f-4331-880a-38fc3a0dd25f",
+      "name": "[Pinterest] Publish via Blotato",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://backend.blotato.com/v2/posts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "blotato-api-key",
+              "value": "={{ $('Prepare for Publish').item.json.blotato_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"post\": {\n    \"target\": {\n      \"targetType\": \"youtube\",\n      \"title\": \"TEST VIDEO\",\n      \"privacyStatus\": \"public\",\n      \"shouldNotifySubscribers\": true\n    },\n    \"content\": {\n      \"text\": {{ $('Prepare for Publish').item.json.final_text_long.toJsonString() }},\n      \"platform\": \"youtube\",\n      \"mediaUrls\": [\"{{ $json.url }}\"]\n    },\n    \"accountId\": \"{{ $('Prepare for Publish').item.json.youtube_id }}\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2640,
+        200
+      ],
+      "id": "f1098b48-0a49-4859-8c49-938be392fc44",
+      "name": "[Youtube] Publish via Blotato"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://backend.blotato.com/v2/posts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "blotato-api-key",
+              "value": "={{ $('Prepare for Publish').item.json.blotato_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"post\": {\n    \"target\": {\n      \"targetType\": \"threads\"\n    },\n    \"content\": {\n      \"text\": {{ $('Prepare for Publish').item.json.final_text_short.toJsonString() }},\n      \"platform\": \"threads\",\n      \"mediaUrls\": [\"{{ $json.url }}\"]\n    },\n    \"accountId\": \"{{ $('Prepare for Publish').item.json.threads_id }}\"\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2640,
+        540
+      ],
+      "id": "44de9515-ab6d-404f-94ee-057314d37f1f",
+      "name": "[Threads] Publish via Blotato",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://backend.blotato.com/v2/posts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "blotato-api-key",
+              "value": "={{ $('Prepare for Publish').item.json.blotato_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"post\": {\n    \"target\": {\n      \"targetType\": \"twitter\"\n    },\n    \"content\": {\n      \"text\": {{ $('Prepare for Publish').item.json.final_text_short.toJsonString() }},\n      \"platform\": \"twitter\",\n      \"mediaUrls\": [\"{{ $json.url }}\"]\n    },\n    \"accountId\": \"{{ $('Prepare for Publish').item.json.twitter_id }}\"\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2640,
+        1000
+      ],
+      "id": "56494380-2c0d-4f14-be0f-2dad21d51899",
+      "name": "[Twitter] Publish via Blotato"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://backend.blotato.com/v2/posts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "blotato-api-key",
+              "value": "={{ $('Prepare for Publish').item.json.blotato_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"post\": {\n    \"target\": {\n      \"targetType\": \"bluesky\"\n    },\n    \"content\": {\n      \"text\": {{ $('Prepare for Publish').item.json.final_text_short.toJsonString() }},\n      \"platform\": \"bluesky\",\n      \"mediaUrls\": []\n    },\n    \"accountId\": \"{{ $('Prepare for Publish').item.json.bluesky_id }}\"\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2640,
+        1400
+      ],
+      "id": "a4abebe4-b783-4021-af37-79d0fd11a758",
+      "name": "[Bluesky] Publish via Blotato",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 10
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1320,
+        940
+      ],
+      "id": "677bce85-b979-450d-ba79-b3a4c79f3654",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "amount": 8,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1420,
+        1000
+      ],
+      "id": "89f91633-4591-4291-9750-fcce3c8543ad",
+      "name": "Wait",
+      "webhookId": "d9404622-0a06-4a65-959e-badd4fd87465",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"heygen_api_key\": \"NWViM2QyYjY1MmRmNDVmMDg3Zjg5ZjdjMTkwYzkyZDQtMTc0Nzk5NTY4Mw==\",\n  \"avatar_id\": \"dd5d50cf0ae0430ca2b779e63415e861\",\n  \"voice_id\": \"b90cc992a94740d8b191cb1a1409a2c9\",\n  \"background_video_url\": \"{{ $json.video.url }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1020,
+        1000
+      ],
+      "id": "bead55af-6991-4d8e-afbc-b65b72f1548e",
+      "name": "Setup Heygen"
+    },
+    {
+      "parameters": {
+        "url": "https://api.heygen.com/v1/video_status.get",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "video_id",
+              "value": "={{ $('Create Avatar Video').item.json.data.video_id }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{ $('Setup Heygen').item.json.heygen_api_key }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1600,
+        1000
+      ],
+      "id": "6f4327e7-a75b-45fb-baba-33493b1e6939",
+      "name": "Get Avatar Video"
+    },
+    {
+      "parameters": {
+        "content": "# Publish to Social Media\n\n- Sign up for Blotato: https://www.blotato.com\n- Blotato's API currently doesn't support uploading videos to Bluesky or Pinterest. \n- This feature will be released in the future, so I've deactivated the nodes for now.",
+        "height": 2040,
+        "width": 1120,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1820,
+        40
+      ],
+      "id": "3e151fed-8d2d-44d4-b52d-0ac5aa7854e9",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"blotato_api_key\": \"blt_LQAAnRBA+H6C30jkwOnLPJXivmt/h4vYJspsyvLPOAs=\",\n  \"instagram_id\": \"5321\",\n  \"youtube_id\": \"4081\",\n  \"tiktok_id\": \"6656\",\n  \"facebook_id\": \"3966\",\n  \"facebook_page_id\": \"123863407355669\",\n  \"threads_id\": \"\",\n  \"twitter_id\": \"2460\",\n  \"linkedin_id\": \"2901\",\n  \"pinterest_id\": \"1228\",\n  \"pinterest_board_id\": \"\",\n  \"bluesky_id\": \"\",\n  \"final_text_long\": {{ $('Write Long Caption').item.json.message.content.toJsonString() }},\n  \"final_text_short\": {{ $('Write Short Caption').item.json.message.content.toJsonString() }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1860,
+        1000
+      ],
+      "id": "5b722a64-b819-4de5-9ed3-9bf0afb387ff",
+      "name": "Prepare for Publish"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=# EXAMPLE\n\n<example>\nMany people have recently asked me about ask engine optimization, which is all about optimizing your website and existing content, so it can be pulled into ChatGPT and other generative AI tools. Consider that generative AI tools tend to be more conversational in nature and have a Q&A type format, so search engines will want to pull in snippets that concisely answer a user’s question.\n\n- what is ask engine optimization in the age of AI?\n- How does traditional SEO compare to ask engine optimization today?\n- top tips and tricks to get started with ask engine optimization?\n\n#ai #askengineoptimization #chatgpts #seo #aitools #digitalmarketing\n</example>\n\n# CONTEXT\n\nInfer the topic from the sources provided, focusing on mortgage industry news or trends relevant to real estate agents, such as interest rates, housing market updates, lending policies, or real estate financing.\n\n# WRITING STYLE\n\nHere’s how you always write:\n\n<writing_style>\n- Your writing style is spartan and informative.\n- Use clear, simple language.\n- Employ short, impactful sentences.\n- Use active voice; avoid passive voice.\n- Focus on practical, actionable insights.\n- Incorporate data or statistics to support claims when possible.\n- Use \"you\" and \"your\" to directly address the reader.\n- Avoid metaphors and clichés.\n- Avoid generalizations.\n- Do not include common setup language in any sentence, including: in conclusion, in closing, etc.\n- Do not output warnings or notes—just the output requested.\n- Do not use hashtags.\n- Do not use semicolons.\n- Do not use emojis.\n- Do not use asterisks.\n- Do not use adjectives and adverbs.\n- Do NOT use these words:\n\"can, may, just, that, very, really, literally, actually, certainly, probably, basically, could, maybe, delve, embark, enlightening, esteemed, shed light, craft, crafting, imagine, realm, game-changer, unlock, discover, skyrocket, abyss, you're not alone, in a world where, revolutionize, disruptive, utilize, utilizing, dive deep, tapestry, illuminate, unveil, pivotal, enrich, intricate, elucidate, hence, furthermore, realm, however, harness, exciting, groundbreaking, cutting-edge, remarkable, it remains to be seen, glimpse into, navigating, landscape, stark, testament, in summary, in conclusion, moreover, boost, bustling, opened up, powerful, inquiries, ever-evolving\"\n</writing_style>\n\n# PLANNING\n\nYour goal is to write a 50-word video caption based on the provided source, designed to engage real estate agents, increase followers, and drive appointments.\n\n1. Analyze the provided sources thoroughly, prioritizing mortgage industry topics relevant to real estate agents.\n2. Study the <example> post carefully. You will be asked to replicate their:\n    - Overall structure.\n    - Tone and voice.\n    - Formatting (including line breaks and spacing).\n    - Length (aim for a similarly detailed post).\n    - Absence of emojis.\n    - Use of hashtags.\n    - Emotional resonance, adapted to inspire action from real estate agents.\n3. Incorporate a call-to-action (CTA) in the first paragraph to drive engagement (e.g., \"Comment 'Agent' to learn about agent productivity boost opportunities\").\n\n# OUTPUT\nFollow the GUIDELINES below to write the post. Use your analysis from step 1 and step 2. Use the provided sources as the foundation for your post, expanding on it significantly while maintaining the style and structure of the examples provided from step 2. You MUST use information from the provided sources. Make sure you adhere to your <writing_style>.\n\n<guidelines>\nThe description should be structured as follows:\n1. Start with 1 paragraph (30-35 words) summarizing the source and including a CTA (e.g., \"Comment 'Agent' to learn about agent productivity boost opportunities with The Mortgage Architect\").\n2. Newline, followed by 3 bullet points of questions that a real estate agent might ask on a search engine about the source.\n3. Newline, followed by these hashtags: #mortgage #realestate #housingmarket #mortgagearchitect #realestateagents\n</guidelines>\n\n# INPUT\nUse the following information sources:\n<sources>\n{{ $json.output }}\n</sources>"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -780,
+        740
+      ],
+      "id": "1d89f958-67be-4cd1-80a0-df6ed3387d46",
+      "name": "Write Long Caption",
+      "credentials": {
+        "openAiApi": {
+          "id": "wwQuhIapHSjyKQqp",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Short form: # PROMPT FOR SHORT SUMMARY\n\nWrite a spartan 2-sentence caption summarizing the video content, using 6th grade language, balanced neutral perspective, no emojis:\n\n<content>\n{{ $json.message.content }}\n</content>\n\n# CONTEXT\nSummarize the mortgage industry news or trend from the provided content, focusing on its relevance to real estate agents (e.g., interest rates, housing market updates, lending policies). Include a subtle call-to-action in the second sentence to encourage engagement (e.g., commenting, following, or booking a consultation).\n\n# WRITING STYLE\n- Use clear, simple language.\n- Employ short, impactful sentences.\n- Use active voice; avoid passive voice.\n- Address real estate agents directly with \"you\" or \"your\" when possible.\n- Avoid hashtags, emojis, asterisks, and semicolons.\n- Do not use these words: can, may, just, that, very, really, literally, actually, certainly, probably, basically, could, maybe, delve, embark, enlightening, esteemed, shed light, craft, crafting, imagine, realm, game-changer, unlock, discover, skyrocket, abyss, you're not alone, in a world where, revolutionize, disruptive, utilize, utilizing, dive deep, tapestry, illuminate, unveil, pivotal, enrich, intricate, elucidate, hence, furthermore, realm, however, harness, exciting, groundbreaking, cutting-edge, remarkable, it remains to be seen, glimpse into, navigating, landscape, stark, testament, in summary, in conclusion, moreover, boost, bustling, opened up, powerful, inquiries, ever-evolving.\n\n# OUTPUT\nOutput only the two-sentence caption. Do not include notes, warnings, or additional formatting."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        400,
+        740
+      ],
+      "id": "c28aa7f8-f7f2-4595-9f71-857f08f6fd67",
+      "name": "Write Short Caption",
+      "credentials": {
+        "openAiApi": {
+          "id": "wwQuhIapHSjyKQqp",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.heygen.com/v2/video/generate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{ $json.heygen_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"{{ $json.avatar_id }}\",\n        \"avatar_style\": \"normal\",\n        \"scale\": 1.0,\n        \"offset\": {\n          \"x\": 0.0,\n          \"y\": 0.0\n        },\n        \"matting\": true\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"{{ $('AI Agent').item.json.output }}\",\n        \"voice_id\": \"{{ $json.voice_id }}\",\n        \"speed\": 1.1,\n        \"pitch\": 50,\n        \"emotion\": \"Excited\"\n      },\n      \"background\": {\n        \"type\": \"video\",\n        \"url\": \"{{ $json.background_video_url }}\",\n        \"play_style\": \"loop\",\n        \"fit\": \"cover\"\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 720,\n    \"height\": 1280\n  },\n  \"aspect_ratio\": \"9:16\",\n  \"caption\": false,\n  \"title\": \"n8n TEST AVATAR\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1220,
+        1000
+      ],
+      "id": "ebfaca88-e70b-4cd6-b275-651c1654da44",
+      "name": "Create Avatar Video"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f9113c83-7b43-4dbe-830f-18a814c3f1f7",
+              "leftValue": "={{ $input.all().filter(item => item.json.status === \"IN_PROGRESS\" || item.json.status === \"IN_QUEUE\").length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        120,
+        1100
+      ],
+      "id": "ec1e4b00-6dc1-4a08-b806-a5952442034c",
+      "name": "Images Done?"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f9113c83-7b43-4dbe-830f-18a814c3f1f7",
+              "leftValue": "={{ $input.all().filter(item => item.json.status === \"IN_PROGRESS\" || item.json.status === \"IN_QUEUE\").length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        140,
+        1340
+      ],
+      "id": "4837bfe0-2391-4ec1-b5fc-18a3accc5602",
+      "name": "Videos Done?"
+    },
+    {
+      "parameters": {
+        "amount": 3
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        340,
+        1100
+      ],
+      "id": "7f1f491b-ca57-4388-9f04-dc37bd8f0322",
+      "name": "3 Seconds",
+      "webhookId": "0a175f88-ae3a-4f35-b7c6-a9ae6deab1d5"
+    },
+    {
+      "parameters": {
+        "url": "=https://queue.fal.run/fal-ai/kling-video/requests/{{ $json.request_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        540,
+        1340
+      ],
+      "id": "a8fd2211-1ef5-4322-be21-f3dfa90207aa",
+      "name": "Get Videos",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "q7tTHDFBwrMl1Zd3",
+          "name": "Fal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://queue.fal.run/fal-ai/kling-video/requests/{{ $('Generate Videos').item.json.request_id }}/status",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -80,
+        1340
+      ],
+      "id": "49095b7f-e1cb-4860-9796-8b07709c1058",
+      "name": "Get Video Status",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "q7tTHDFBwrMl1Zd3",
+          "name": "Fal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://queue.fal.run/fal-ai/kling-video/v1.6/pro/image-to-video",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "prompt",
+              "value": "={{ $('Prompt Generator').item.json.output.video_prompt }}"
+            },
+            {
+              "name": "image_url",
+              "value": "={{ $json.images[0].url }}"
+            },
+            {
+              "name": "aspect_ratio",
+              "value": "9:16"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -440,
+        1340
+      ],
+      "id": "ecf531c3-f6f8-469f-b060-032210371e9e",
+      "name": "Generate Videos",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "q7tTHDFBwrMl1Zd3",
+          "name": "Fal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://queue.fal.run/fal-ai/flux-pro/requests/{{ $json.request_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        520,
+        1100
+      ],
+      "id": "30b34928-bc86-4246-bea3-ed0fc2cbb5ca",
+      "name": "Get Images",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "q7tTHDFBwrMl1Zd3",
+          "name": "Fal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://queue.fal.run/fal-ai/flux-pro/requests/{{ $json.request_id }}/status",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -80,
+        1100
+      ],
+      "id": "980a9b3c-3753-4009-9e6c-89aa2089c5fd",
+      "name": "Get Status",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "q7tTHDFBwrMl1Zd3",
+          "name": "Fal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://queue.fal.run/fal-ai/flux-pro/v1.1-ultra",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "prompt",
+              "value": "={{ $json.output.image_prompt }}"
+            },
+            {
+              "name": "aspect_ratio",
+              "value": "9:16"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -440,
+        1100
+      ],
+      "id": "40b57dd8-f9c6-4911-b5fc-1bfa643fa0a1",
+      "name": "Generate Images",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "q7tTHDFBwrMl1Zd3",
+          "name": "Fal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are a visual content AI creating automated mortgage education and branding videos for Ivan Duarte, The Mortgage Architect at ROC Mortgage Group.\n\nYou will be given a mortgage topic, concept, or question.\n\nYour job is to generate 1 outputs for a short Createomate video:\n\n1. Image Prompt (Scene Background)\nDescribe a symbolic, highly visual scene that reflects the mortgage topic. The image should:\n\nFeel inspirational, cozy, and emotionally clear\n\nInclude a miniature home or architectural metaphor\n\nUse details like documents, signs, hands, paths, people\n\nShow tiny people for scale and relatability\n\nFeel perfect as a static background for a 5–10 second video\n\n2. Video Prompt (Motion Concept)\nDescribe a loopable 5-second camera movement or ambient animation to layer over the image. Include ideas like:\n\nSlowly rotating camera\n\nBreezes blowing paperwork or trees\n\nWarm lighting changes\n\nCharacters waving or walking\n\nThis is for Createomate’s video layer logic — keep it gentle and satisfying.\n\n3. Audio Prompt (Background Music)\nSuggest a soundtrack idea that reflects the topic’s emotion and tone. Use:\n\nLo-fi, ambient, or cinematic music\n\nNo vocals or sound effects\n\nAlign it with moods like clarity, calm, momentum, or confidence\n\n4. Caption Prompt (Text Overlay)\nWrite a 6–8 word caption for the overlay text. It should:\n\nBe clear, emotionally resonant, and topic-specific\n\nUse benefit-forward language (e.g., clarity, confidence, savings)\n\nBe formatted for Createomate text blocks (no hashtags or emojis)\n\n🔄 Sample Output (Topic: \"FHA vs Conventional\")\nImage Prompt:\nA miniature neighborhood with two houses side-by-side: one labeled “FHA” with an open welcome mat and guardrails, the other “Conventional” with a wider staircase. Tiny people walk between the two, comparing features, with brochures in hand. Soft light fills the scene.\n\nVideo Prompt:\nThe camera gently pans between both houses while trees sway and small signs flutter. A person waves from each front porch.\n\nAudio Prompt:\nAmbient piano with soft beats and warm tones, giving a sense of calm decision-making and progress.\n\nCaption Prompt:\nChoose the Right Path to Home\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -800,
+        1100
+      ],
+      "id": "fb868afd-c611-40fb-ba84-613ce4f6c26f",
+      "name": "Prompt Generator"
+    },
+    {
+      "parameters": {
+        "amount": 20
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        360,
+        1340
+      ],
+      "id": "f50a8e63-4218-4d4f-8c00-039feddbc366",
+      "name": "20 Second",
+      "webhookId": "3df950c4-9116-466b-99ac-6c768615d247"
+    },
+    {
+      "parameters": {
+        "amount": 20
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -260,
+        1100
+      ],
+      "id": "9efcaff7-dc36-47e2-a416-511ac19a91d1",
+      "name": "20 Seconds",
+      "webhookId": "1edecdff-d63e-4821-81a4-794545558e7e"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"brand\": \"[Brand Name]\",\n  \"image_prompt\": \"[Detailed visual description]\",\n  \"video_prompt\": \"[5-second cinematic loop prompt]\",\n  \"audio_prompt\": \"[Immersive, brand-aligned music description]\",\n  \"image_caption\": \"[Immersive, brand-aligned image caption]\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        -1240,
+        1460
+      ],
+      "id": "862e9635-82d6-44eb-8bd3-02d4b1c8e149",
+      "name": "Prompts"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -980,
+        1320
+      ],
+      "id": "ad366024-f799-47da-9831-b018d7076a6d",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "wwQuhIapHSjyKQqp",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "# INSTRUCTIONS\n\nPerform the following tasks, in order:\n\n1. Fetch the top 10 stories from trends related to the mortgage industry, such as interest rates, housing market updates, lending policies, or real estate financing, with preference for topics relevant to Massachusetts and Florida when applicable. \n\n2. Select the story or trend most likely to resonate with real estate agents, drive social media engagement (likes, comments, shares), and encourage appointments, based on its relevance to their business (e.g., helping clients secure loans, navigating market shifts, or leveraging new mortgage products).\n\n3. Fetch the primary article or source content and any relevant discussions or reactions from X posts or comments to ensure credibility and real-time context.\n\n4. Create a 30-second monologue script for an AI avatar video, following these guidelines:\n    - The script should be exactly 30 seconds when spoken aloud, with an energetic and professional tone optimized for HeyGen’s AI avatar delivery.\n   - Include specific details, statistics, or actionable insights from the source that real estate agents can use (e.g., how a rate change affects buyers or a new loan program benefits clients).\n   - Use a 6th grade reading level for clarity and accessibility.\n   - Maintain a balanced viewpoint, avoiding overly promotional tones, while reflecting The ROC Mortgage Group’s tech-savvy, family-first Mortgage Architect brand.\n   - Include a mid-script call-to-action (CTA) inviting agents to book a free consultation or attend a webinar/Lunch and Learn to learn more about mortgage solutions (e.g., “Book a quick call to boost your closings!”).\n   - Prompt engagement by encouraging viewers to comment or DM for a free resource (e.g., “Comment ‘Rates’ for a free rate guide!”).\n   - Optionally include location-specific details for Massachusetts or Florida to increase local relevance, or keep general for broader appeal.\n   \n\n\n5. Update the script’s first 2 sentences to use sensational, viral hooks that grab real estate agents’ attention, spark curiosity about their clients or business, and prompt immediate interaction (e.g., “Struggling to close deals in this market? This news changes everything!”). The 3rd sentence should start diving into the story’s details.\n\n6. Replace the last sentence with: “Follow us for weekly mortgage tips to grow your real estate business and DM ‘Learn’ to book a free strategy call!”\n\n\n# OUTPUT FORMAT\n{\n\"output\": \"\"\n}\n\nONLY output the exact video script. Do not output anything else. NEVER include intermediate thoughts, notes, or formatting.",
+        "hasOutputParser": true,
+        "options": {
+          "returnIntermediateSteps": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        -1120,
+        940
+      ],
+      "id": "677edeef-5009-461b-837d-aa1a8e621272",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "amount": 2,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -280,
+        1340
+      ],
+      "id": "12b887cf-7230-4d77-84a1-5385ff34cc58",
+      "name": "2 Minutes",
+      "webhookId": "c955252e-d3cb-47c8-a774-53d16c56a78b"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        820,
+        1000
+      ],
+      "id": "b2cfd67b-0b76-44d9-a63a-808d98ed924d",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 300,
+        "width": 540,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1380,
+        1280
+      ],
+      "typeVersion": 1,
+      "id": "f995980e-1224-4a7f-99ae-e1888c3b4cee",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "# Generate Background Video\n",
+        "height": 580,
+        "width": 1500,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -820,
+        1000
+      ],
+      "typeVersion": 1,
+      "id": "69eb1556-d7a0-4e85-8658-c1526a0217fa",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "# Start Workflow\n\n",
+        "height": 600,
+        "width": 540,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1380,
+        660
+      ],
+      "typeVersion": 1,
+      "id": "d4992eba-67b0-441d-9f47-fc998958f1e5",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Generate Long and Short Caption\n",
+        "height": 320,
+        "width": 1500,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -820,
+        660
+      ],
+      "typeVersion": 1,
+      "id": "a7e02f88-1a17-45bb-a3fc-2b64e7b1e9c6",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "# Generate video with Heygen",
+        "height": 920,
+        "width": 1100,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        700,
+        660
+      ],
+      "typeVersion": 1,
+      "id": "26745efa-3476-4550-b59c-2ffece17b556",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"output\": \"\"\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -1260,
+        1320
+      ],
+      "id": "d64e0cf8-740d-4da5-b5f3-278865a0a501",
+      "name": "Output Parser"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4",
+          "mode": "list",
+          "cachedResultName": "gpt-4"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1360,
+        1320
+      ],
+      "id": "a721864d-effa-4eec-b914-e980c299292c",
+      "name": "model",
+      "credentials": {
+        "openAiApi": {
+          "id": "wwQuhIapHSjyKQqp",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1360,
+        1460
+      ],
+      "id": "228d6a84-7ebe-4871-bc9c-a9dee4721c51",
+      "name": "fix output",
+      "credentials": {
+        "openAiApi": {
+          "id": "wwQuhIapHSjyKQqp",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Upload to Blotato": {
+      "main": [
+        [
+          {
+            "node": "[Instagram] Publish via Blotato",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "[Facebook] Publish via Blotato",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "[Linkedin] Publish via Blotato",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "[Tiktok] Publish via Blotato",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "[Youtube] Publish via Blotato",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "[Threads] Publish via Blotato",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "[Twitter] Publish via Blotato",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "[Bluesky] Publish via Blotato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Upload to Blotato - Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload to Blotato - Image": {
+      "main": [
+        [
+          {
+            "node": "[Pinterest] Publish via Blotato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Setup Heygen": {
+      "main": [
+        [
+          {
+            "node": "Create Avatar Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Get Avatar Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Avatar Video": {
+      "main": [
+        [
+          {
+            "node": "Prepare for Publish",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare for Publish": {
+      "main": [
+        [
+          {
+            "node": "Upload to Blotato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Long Caption": {
+      "main": [
+        [
+          {
+            "node": "Write Short Caption",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Short Caption": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Avatar Video": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Images Done?": {
+      "main": [
+        [
+          {
+            "node": "Get Images",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "3 Seconds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Videos Done?": {
+      "main": [
+        [
+          {
+            "node": "Get Videos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "20 Second",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3 Seconds": {
+      "main": [
+        [
+          {
+            "node": "Get Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Video Status": {
+      "main": [
+        [
+          {
+            "node": "Videos Done?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Videos": {
+      "main": [
+        [
+          {
+            "node": "2 Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Images": {
+      "main": [
+        [
+          {
+            "node": "Generate Videos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Status": {
+      "main": [
+        [
+          {
+            "node": "Images Done?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Images": {
+      "main": [
+        [
+          {
+            "node": "20 Seconds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prompt Generator": {
+      "main": [
+        [
+          {
+            "node": "Generate Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "20 Second": {
+      "main": [
+        [
+          {
+            "node": "Get Video Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "20 Seconds": {
+      "main": [
+        [
+          {
+            "node": "Get Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Prompt Generator",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prompts": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Prompt Generator",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Write Long Caption",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Prompt Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Get Video Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Videos": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Setup Heygen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "fix output": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4795790c-1ff6-4da9-884d-c7bf3deb8631",
+  "meta": {
+    "instanceId": "4615c02a832cc4f1ba163081bf6e7ca073840941064fbdafefc89f8edb95a324"
+  },
+  "id": "peldFb7LLFZsIrU0",
+  "tags": []
+}
